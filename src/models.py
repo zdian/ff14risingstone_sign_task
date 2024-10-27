@@ -24,6 +24,10 @@ class Settings(BaseSettings):
     input_comment_post_id: int = 8
     input_check_house_remain: bool = False
     input_get_sign_reward: bool = True
+    input_corpid: str = ""
+    input_secret: str = ""
+    input_agentid: str = ""
+    input_touser: str = ""
 
 
 class SealType(IntEnum):

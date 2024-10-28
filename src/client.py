@@ -28,6 +28,8 @@ client = httpx.Client(
     # proxies="http://127.0.0.1:8888",
 )
 
+client_wx = httpx.Client(timeout=30)
+
 def get_wecom_token():
     r = client_wx.get(
         f"https://qyapi.weixin.qq.com/cgi-bin/gettoken?corpid={settings.input_corpid}&corpsecret={settings.input_secret}"

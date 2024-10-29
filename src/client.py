@@ -92,6 +92,7 @@ def sign_in():
     )
 
     logging.info(r.text)
+    send_wecom(r.text)
 
 
 def like():

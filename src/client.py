@@ -8,6 +8,7 @@ from .models import SealType, SignRewardListResponse
 
 client = httpx.Client(
     headers={
+        "Content-Type": "application/x-www-form-urlencoded",
         "accept": "application/json, text/plain, */*",
         "cache-control": "no-cache",
         "pragma": "no-cache",
@@ -85,7 +86,7 @@ def is_login_in():
 
 def sign_in():
     r = client.post(
-        f"{settings.input_base_url}/api/home/sign/signIn",
+        f"{settings.input_base_url}/api/home/sign/signIn?tempsuid={str(uuid.uuid4())}",
         params={
             "tempsuid": str(uuid.uuid4()),
         },

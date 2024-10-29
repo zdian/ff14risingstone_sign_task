@@ -86,8 +86,11 @@ def is_login_in():
 
 def sign_in():
     r = client.post(
-        f"{settings.input_base_url}/api/home/sign/signIn?tempsuid={str(uuid.uuid4())}",
+        f"{settings.input_base_url}/api/home/sign/signIn",
         params={
+            "tempsuid": str(uuid.uuid4()),
+        },
+        data={
             "tempsuid": str(uuid.uuid4()),
         },
     )

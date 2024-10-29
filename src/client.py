@@ -9,20 +9,8 @@ from .models import SealType, SignRewardListResponse
 client = httpx.Client(
     headers={
         "Content-Type": "application/x-www-form-urlencoded",
-        "accept": "application/json, text/plain, */*",
-        "cache-control": "no-cache",
-        "pragma": "no-cache",
-        "priority": "u=1, i",
-        "sec-ch-ua": '"Google Chrome";v="129", "Not=A?Brand";v="8", "Chromium";v="129"',
-        "sec-ch-ua-mobile": "?0",
-        "sec-ch-ua-platform": '"Windows"',
-        "sec-fetch-dest": "empty",
-        "sec-fetch-mode": "cors",
-        "sec-fetch-site": "same-site",
-        "Referer": "https://ff14risingstones.web.sdo.com/",
-        "Referrer-Policy": "strict-origin-when-cross-origin",
         "User-Agent": settings.input_user_agent,
-        "Cookie": settings.input_cookie,
+        "Cookie": settings.input_cookie
     },
     timeout=30,
     # verify=False,
@@ -92,7 +80,7 @@ def sign_in():
         },
         data={
             "tempsuid": str(uuid.uuid4()),
-        },
+        }
     )
 
     logging.info(r.text)

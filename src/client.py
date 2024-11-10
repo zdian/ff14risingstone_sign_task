@@ -6,16 +6,27 @@ import httpx
 from . import settings
 from .models import SealType, SignRewardListResponse
 
-client = httpx.Client(
-    headers={
-        "Content-Type": "application/x-www-form-urlencoded",
-        "User-Agent": settings.input_user_agent,
-        "Cookie": settings.input_cookie
-    },
-    timeout=30,
-    # verify=False,
-    # proxies="http://127.0.0.1:8888",
-)
+def make_client(cookie):
+    client = httpx.Client(
+        headers={
+            "Content-Type": "application/x-www-form-urlencoded",
+            "User-Agent": settings.input_user_agent,
+            "Cookie": cookie
+        },
+        timeout=30,
+    )
+    return client
+    
+# client = httpx.Client(
+#     headers={
+#         "Content-Type": "application/x-www-form-urlencoded",
+#         "User-Agent": settings.input_user_agent,
+#         "Cookie": settings.input_cookie
+#     },
+#     timeout=30,
+#     # verify=False,
+#     # proxies="http://127.0.0.1:8888",
+# )
 
 client_wx = httpx.Client(timeout=30)
 
@@ -72,8 +83,8 @@ def is_login_in():
     logging.info(r.text)
 
 
-def sign_in():
-    r = client.post(
+def sign_in(cookie):
+    r = make_client(cookie).post(
         f"{settings.input_base_url}/api/home/sign/signIn",
         params={
             "tempsuid": str(uuid.uuid4()),
@@ -128,8 +139,8 @@ def get_user_info():
     return r
 
 
-def get_sign_reward(id_, month):
-    r = client.post(
+def get_sign_reward(id_, month, cookie):
+    r = make_client(cookie).post(
         f"{settings.input_base_url}/api/home/sign/getSignReward",
         params={
             "tempsuid": str(uuid.uuid4()),
@@ -144,8 +155,8 @@ def get_sign_reward(id_, month):
     return r
 
 
-def get_sign_reward_list(month):
-    r = client.get(
+def get_sign_reward_list(month, cookie):
+    r = make_client(cookie).get(
         f"{settings.input_base_url}/api/home/sign/signRewardList",
         params={
             "month": month,

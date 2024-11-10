@@ -54,8 +54,8 @@ def send_wecom(msg):
         logging.info("没有获得token，发送企业微信消息失败")
 
 
-def do_seal(type_: SealType):
-    r = client.post(
+def do_seal(type_: SealType, cookie):
+    r = make_client(cookie).post(
         f"{settings.input_base_url}/api/home/active/online2312/doSeal",
         data={"type": type_},
     )
@@ -70,8 +70,8 @@ def do_seal(type_: SealType):
         send_wecom(r.text)
 
 
-def is_login_in():
-    r = client.get(
+def is_login_in(cookie):
+    r = make_client(cookie).get(
         f"{settings.input_base_url}/api/home/sysMsg/getSysMsg",
         params={
             "page": 1,
@@ -98,8 +98,8 @@ def sign_in(cookie):
     send_wecom(r.text)
 
 
-def like():
-    r = client.post(
+def like(cookie):
+    r = make_client(cookie).post(
         f"{settings.input_base_url}/api/home/posts/like",
         params={
             "tempsuid": str(uuid.uuid4()),
@@ -111,8 +111,8 @@ def like():
     return r
 
 
-def comment():
-    r = client.post(
+def comment(cookie):
+    r = make_client(cookie).post(
         f"{settings.input_base_url}/api/home/posts/comment",
         params={
             "tempsuid": str(uuid.uuid4()),
@@ -129,8 +129,8 @@ def comment():
     logging.info(r.text)
 
 
-def get_user_info():
-    r = client.get(
+def get_user_info(cookie):
+    r = make_client(cookie).get(
         f"{settings.input_base_url}/api/home/userInfo/getUserInfo",
         params={"page": 1},
         headers={"Content-Type": "application/x-www-form-urlencoded"},

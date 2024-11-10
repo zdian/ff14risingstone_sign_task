@@ -11,30 +11,30 @@ def main():
     for cookie in settings.input_cookie.splitlines():
         logging.info("开始签到")
         sign_in(cookie)
-        # do_seal(SealType.SIGN)
+        # do_seal(SealType.SIGN, cookie)
     
         # logging.info("开始点赞")
         # counter = 0
         # for _ in range(10):
         #     time.sleep(3)
-        #     r = like()
+        #     r = like(cookie)
         #     if r.json()["data"] == 1:
         #         counter += 1
         #         logging.info(f"第{counter}次点赞结束")
     
         # time.sleep(3)
-        # do_seal(SealType.LIKE)
+        # do_seal(SealType.LIKE, cookie)
     
         # logging.info("开始评论")
         # time.sleep(3)
-        # comment()
-        # do_seal(SealType.COMMENT)
+        # comment(cookie)
+        # do_seal(SealType.COMMENT, cookie)
     
         # logging.info("任务完成")
     
         # if settings.input_check_house_remain:
         #     logging.info("开始检查房屋拆除倒计时")
-        #     user_info: dict[str, Any] = get_user_info()
+        #     user_info: dict[str, Any] = get_user_info(cookie)
         #     house_remain_day = (
         #         user_info.get("data", {}).get("characterDetail", {}).get("house_remain_day")
         #     )

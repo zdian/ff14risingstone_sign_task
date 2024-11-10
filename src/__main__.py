@@ -8,47 +8,48 @@ from .client import sign_in, get_user_info, get_sign_reward, get_sign_reward_lis
 
 
 def main():
-    logging.info("开始签到")
-    sign_in()
-    # do_seal(SealType.SIGN)
+    for cookie in settings.input_cookie.splitlines():
+        logging.info("开始签到")
+        sign_in(cookie)
+        # do_seal(SealType.SIGN)
+    
+        # logging.info("开始点赞")
+        # counter = 0
+        # for _ in range(10):
+        #     time.sleep(3)
+        #     r = like()
+        #     if r.json()["data"] == 1:
+        #         counter += 1
+        #         logging.info(f"第{counter}次点赞结束")
+    
+        # time.sleep(3)
+        # do_seal(SealType.LIKE)
+    
+        # logging.info("开始评论")
+        # time.sleep(3)
+        # comment()
+        # do_seal(SealType.COMMENT)
+    
+        # logging.info("任务完成")
+    
+        # if settings.input_check_house_remain:
+        #     logging.info("开始检查房屋拆除倒计时")
+        #     user_info: dict[str, Any] = get_user_info()
+        #     house_remain_day = (
+        #         user_info.get("data", {}).get("characterDetail", {}).get("house_remain_day")
+        #     )
+        #     if house_remain_day:
+        #         raise Exception(f"房屋拆除倒计时：{house_remain_day}")
 
-    # logging.info("开始点赞")
-    # counter = 0
-    # for _ in range(10):
-    #     time.sleep(3)
-    #     r = like()
-    #     if r.json()["data"] == 1:
-    #         counter += 1
-    #         logging.info(f"第{counter}次点赞结束")
-
-    # time.sleep(3)
-    # do_seal(SealType.LIKE)
-
-    # logging.info("开始评论")
-    # time.sleep(3)
-    # comment()
-    # do_seal(SealType.COMMENT)
-
-    # logging.info("任务完成")
-
-    if settings.input_check_house_remain:
-        logging.info("开始检查房屋拆除倒计时")
-        user_info: dict[str, Any] = get_user_info()
-        house_remain_day = (
-            user_info.get("data", {}).get("characterDetail", {}).get("house_remain_day")
-        )
-        if house_remain_day:
-            raise Exception(f"房屋拆除倒计时：{house_remain_day}")
-
-    if settings.input_get_sign_reward:
-        reward_list = get_sign_reward_list(get_current_month())
-        logging.info(f"本月奖励列表：{reward_list}")
-        for reward in filter(
-            lambda reward: reward.is_get == SignRewardItemGetType.AVAILABLE, reward_list
-        ):
-            logging.info(f"开始领取签到奖励：{reward.item_name}")
-            r = get_sign_reward(reward.id, get_current_month())
-            logging.info(r.json())
+        if settings.input_get_sign_reward:
+            reward_list = get_sign_reward_list(get_current_month(), cookie)
+            logging.info(f"本月奖励列表：{reward_list}")
+            for reward in filter(
+                lambda reward: reward.is_get == SignRewardItemGetType.AVAILABLE, reward_list
+            ):
+                logging.info(f"开始领取签到奖励：{reward.item_name}")
+                r = get_sign_reward(reward.id, get_current_month(), cookie)
+                logging.info(r.json())
 
 
 if __name__ == "__main__":

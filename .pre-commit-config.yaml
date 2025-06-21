@@ -14,4 +14,3 @@ repos:
         stages: [pre-commit]
       - id: ruff-format
         stages: [pre-commit]
-        test: t

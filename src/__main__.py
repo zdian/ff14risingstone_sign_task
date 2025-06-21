@@ -17,7 +17,7 @@ def main():
     for cookie, ua in zip(cookies, uas):
         if cookie and ua:
             sign_in(cookie, ua)
-            
+
             if settings.input_check_house_remain:
                 logging.info("开始检查房屋拆除倒计时")
                 user_info: dict[str, Any] = get_user_info(cookie, ua)

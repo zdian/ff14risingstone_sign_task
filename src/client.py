@@ -25,7 +25,7 @@ HEADERS = {
 }
 
 
-def do_seal(type_: SealType, cookie: str):
+def do_seal(type_: SealType, cookie):
     HEADERS["Cookie"] = cookie
     r = requests.post(
         f"{settings.input_base_url}/api/home/active/online2312/doSeal",
@@ -37,7 +37,7 @@ def do_seal(type_: SealType, cookie: str):
     logging.info(r.text)
 
 
-def is_login_in(cookie: str):
+def is_login_in(cookie):
     HEADERS["Cookie"] = cookie
     r = requests.get(
         f"{settings.input_base_url}/api/home/sysMsg/getSysMsg",
@@ -53,7 +53,7 @@ def is_login_in(cookie: str):
     logging.info(r.text)
 
 
-def sign_in(cookie: str):
+def sign_in(cookie):
     HEADERS["Cookie"] = cookie
     r = requests.post(
         f"{settings.input_base_url}/api/home/sign/signIn",
@@ -75,7 +75,7 @@ def sign_in(cookie: str):
     logging.info(r.text)
 
 
-def like(cookie: str):
+def like(cookie):
     HEADERS["Cookie"] = cookie
     r = requests.post(
         f"{settings.input_base_url}/api/home/posts/like",
@@ -91,7 +91,7 @@ def like(cookie: str):
     return r
 
 
-def comment(cookie: str):
+def comment(cookie):
     HEADERS["Cookie"] = cookie
     r = requests.post(
         f"{settings.input_base_url}/api/home/posts/comment",
@@ -112,7 +112,7 @@ def comment(cookie: str):
     logging.info(r.text)
 
 
-def get_user_info(cookie: str):
+def get_user_info(cookie):
     HEADERS["Cookie"] = cookie
     r = requests.get(
         f"{settings.input_base_url}/api/home/userInfo/getUserInfo",
@@ -124,7 +124,7 @@ def get_user_info(cookie: str):
     return r
 
 
-def get_sign_reward(id_: str, month: str, cookie: str):
+def get_sign_reward(id_, month, cookie):
     HEADERS["Cookie"] = cookie
     r = requests.post(
         f"{settings.input_base_url}/api/home/sign/getSignReward",
@@ -143,7 +143,7 @@ def get_sign_reward(id_: str, month: str, cookie: str):
     return r
 
 
-def get_sign_reward_list(month: str, cookie: str):
+def get_sign_reward_list(month, cookie):
     HEADERS["Cookie"] = cookie
     r = requests.get(
         f"{settings.input_base_url}/api/home/sign/signRewardList",

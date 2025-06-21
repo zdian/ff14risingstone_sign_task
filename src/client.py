@@ -25,7 +25,8 @@ HEADERS = {
 }
 
 
-def do_seal(type_: SealType):
+def do_seal(type_: SealType, cookie: str):
+    HEADERS["Cookie"] = cookie
     r = requests.post(
         f"{settings.input_base_url}/api/home/active/online2312/doSeal",
         data={"type": type_},  # type: ignore
@@ -36,7 +37,8 @@ def do_seal(type_: SealType):
     logging.info(r.text)
 
 
-def is_login_in():
+def is_login_in(cookie: str):
+    HEADERS["Cookie"] = cookie
     r = requests.get(
         f"{settings.input_base_url}/api/home/sysMsg/getSysMsg",
         params={
@@ -51,7 +53,8 @@ def is_login_in():
     logging.info(r.text)
 
 
-def sign_in():
+def sign_in(cookie: str):
+    HEADERS["Cookie"] = cookie
     r = requests.post(
         f"{settings.input_base_url}/api/home/sign/signIn",
         params={
@@ -72,7 +75,8 @@ def sign_in():
     logging.info(r.text)
 
 
-def like():
+def like(cookie: str):
+    HEADERS["Cookie"] = cookie
     r = requests.post(
         f"{settings.input_base_url}/api/home/posts/like",
         params={
@@ -87,7 +91,8 @@ def like():
     return r
 
 
-def comment():
+def comment(cookie: str):
+    HEADERS["Cookie"] = cookie
     r = requests.post(
         f"{settings.input_base_url}/api/home/posts/comment",
         params={
@@ -107,7 +112,8 @@ def comment():
     logging.info(r.text)
 
 
-def get_user_info():
+def get_user_info(cookie: str):
+    HEADERS["Cookie"] = cookie
     r = requests.get(
         f"{settings.input_base_url}/api/home/userInfo/getUserInfo",
         params={"page": 1},
@@ -118,7 +124,8 @@ def get_user_info():
     return r
 
 
-def get_sign_reward(id_, month):
+def get_sign_reward(id_: str, month: str, cookie: str):
+    HEADERS["Cookie"] = cookie
     r = requests.post(
         f"{settings.input_base_url}/api/home/sign/getSignReward",
         params={
@@ -136,7 +143,8 @@ def get_sign_reward(id_, month):
     return r
 
 
-def get_sign_reward_list(month):
+def get_sign_reward_list(month: str, cookie: str):
+    HEADERS["Cookie"] = cookie
     r = requests.get(
         f"{settings.input_base_url}/api/home/sign/signRewardList",
         params={

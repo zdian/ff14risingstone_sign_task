@@ -31,11 +31,13 @@ jobs:
 1. `COOKIE`
 
 值为 `Cookie` 头中以等号 `=` 分割的 `ff14risingstones` 键值对，其中右值为 urlencode 后的结果。
+多个号之间用换行符隔开。
 
 例：
 
 ```bash
 ff14risingstones=s%3A1111.2222222%2F33333
+ff14risingstones=s%4B2222.3333333%3F44444
 ```
 
 2. `USER_AGENT`

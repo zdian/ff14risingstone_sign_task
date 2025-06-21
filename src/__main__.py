@@ -30,7 +30,8 @@ def main():
                 reward_list = get_sign_reward_list(get_current_month(), cookie)
                 logging.info(f"本月奖励列表：{reward_list}")
                 for reward in filter(
-                    lambda reward: reward.is_get == SignRewardItemGetType.AVAILABLE, reward_list
+                    lambda reward: reward.is_get == SignRewardItemGetType.AVAILABLE,
+                    reward_list
                 ):
                     logging.info(f"开始领取签到奖励：{reward.item_name}")
                     r = get_sign_reward(reward.id, get_current_month(), cookie)

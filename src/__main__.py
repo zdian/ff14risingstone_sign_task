@@ -11,13 +11,16 @@ def main():
     logging.info("开始签到")
     # 支持多个cookie，以换行分割
     cookies = settings.input_cookie.split("\n")
-    for cookie in cookies:
-        if cookie:
-            sign_in(cookie)
-
+    uas = settings.input_user_agent.split("\n")
+    if len(cookies) != len(uas):
+        raise Exception("cookie和user-agent数量不一致")
+    for cookie, ua in zip(cookies, uas):
+        if cookie and ua:
+            sign_in(cookie, ua)
+            
             if settings.input_check_house_remain:
                 logging.info("开始检查房屋拆除倒计时")
-                user_info: dict[str, Any] = get_user_info(cookie)
+                user_info: dict[str, Any] = get_user_info(cookie, ua)
                 house_remain_day = (
                     user_info.get("data", {})
                     .get("characterDetail", [{}])[0]
@@ -27,14 +30,14 @@ def main():
                     raise Exception(f"房屋拆除倒计时：{house_remain_day}")
 
             if settings.input_get_sign_reward:
-                reward_list = get_sign_reward_list(get_current_month(), cookie)
+                reward_list = get_sign_reward_list(get_current_month(), cookie, ua)
                 logging.info(f"本月奖励列表：{reward_list}")
                 for reward in filter(
                     lambda reward: reward.is_get == SignRewardItemGetType.AVAILABLE,
                     reward_list
                 ):
                     logging.info(f"开始领取签到奖励：{reward.item_name}")
-                    r = get_sign_reward(reward.id, get_current_month(), cookie)
+                    r = get_sign_reward(reward.id, get_current_month(), cookie, ua)
                     logging.info(r.json())
 
 

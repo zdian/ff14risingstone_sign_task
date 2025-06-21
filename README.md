@@ -45,12 +45,13 @@ ff14risingstones=s%4B2222.3333333%3F44444
 > [!NOTE]
 > 由于石之家 API 新增的检测机制，需要设置与登录（获取 Cookie）时相同的 User-Agent 头，详情参考 [#17](https://github.com/StarHeartHunt/ff14risingstone_sign_task/issues/17)
 
-值为登录时向石之家 API 所发送的 `User-Agent` 头。
+值为登录时向石之家 API 所发送的 `User-Agent` 头。多个号之间用换行符隔开。
 
 例：
 
 ```bash
-Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36
+Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36
+Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36 Edg/137.0.0.0
 ```
 
 ## 配置项

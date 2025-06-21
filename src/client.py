@@ -25,8 +25,9 @@ HEADERS = {
 }
 
 
-def do_seal(type_: SealType, cookie):
+def do_seal(type_: SealType, cookie, ua):
     HEADERS["Cookie"] = cookie
+    HEADERS["User-Agent"] = ua
     r = requests.post(
         f"{settings.input_base_url}/api/home/active/online2312/doSeal",
         data={"type": type_},  # type: ignore
@@ -37,8 +38,9 @@ def do_seal(type_: SealType, cookie):
     logging.info(r.text)
 
 
-def is_login_in(cookie):
+def is_login_in(cookie, ua):
     HEADERS["Cookie"] = cookie
+    HEADERS["User-Agent"] = ua
     r = requests.get(
         f"{settings.input_base_url}/api/home/sysMsg/getSysMsg",
         params={
@@ -53,8 +55,9 @@ def is_login_in(cookie):
     logging.info(r.text)
 
 
-def sign_in(cookie):
+def sign_in(cookie, ua):
     HEADERS["Cookie"] = cookie
+    HEADERS["User-Agent"] = ua
     r = requests.post(
         f"{settings.input_base_url}/api/home/sign/signIn",
         params={
@@ -75,8 +78,9 @@ def sign_in(cookie):
     logging.info(r.text)
 
 
-def like(cookie):
+def like(cookie, ua):
     HEADERS["Cookie"] = cookie
+    HEADERS["User-Agent"] = ua
     r = requests.post(
         f"{settings.input_base_url}/api/home/posts/like",
         params={
@@ -91,8 +95,9 @@ def like(cookie):
     return r
 
 
-def comment(cookie):
+def comment(cookie, ua):
     HEADERS["Cookie"] = cookie
+    HEADERS["User-Agent"] = ua
     r = requests.post(
         f"{settings.input_base_url}/api/home/posts/comment",
         params={
@@ -112,8 +117,9 @@ def comment(cookie):
     logging.info(r.text)
 
 
-def get_user_info(cookie):
+def get_user_info(cookie, ua):
     HEADERS["Cookie"] = cookie
+    HEADERS["User-Agent"] = ua
     r = requests.get(
         f"{settings.input_base_url}/api/home/userInfo/getUserInfo",
         params={"page": 1},
@@ -124,8 +130,9 @@ def get_user_info(cookie):
     return r
 
 
-def get_sign_reward(id_, month, cookie):
+def get_sign_reward(id_, month, cookie, ua):
     HEADERS["Cookie"] = cookie
+    HEADERS["User-Agent"] = ua
     r = requests.post(
         f"{settings.input_base_url}/api/home/sign/getSignReward",
         params={
@@ -143,8 +150,9 @@ def get_sign_reward(id_, month, cookie):
     return r
 
 
-def get_sign_reward_list(month, cookie):
+def get_sign_reward_list(month, cookie, ua):
     HEADERS["Cookie"] = cookie
+    HEADERS["User-Agent"] = ua
     r = requests.get(
         f"{settings.input_base_url}/api/home/sign/signRewardList",
         params={
